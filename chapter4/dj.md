@@ -167,6 +167,8 @@ docstring을 출력하려면 help()로 출력할 수 있고 함수 이름을 인
 
 저장과정이 빠졌기 때문에 퍼포먼스 상에서 더욱 더 빠른 속도를 낼 수 있고 메모리 사용율도 감소 가능
 
+[참조](http://schoolofweb.net/blog/posts/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A0%9C%EB%84%88%EB%A0%88%EC%9D%B4%ED%84%B0-generator/)
+
 ## 4.9 데커레이터
 하나의 함수를 이용해 또 다른 함수를 반환하는 함수이다.
 - *args와 **kwargs
