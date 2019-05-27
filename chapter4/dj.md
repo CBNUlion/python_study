@@ -50,6 +50,7 @@ next(z)  #1
 type(x)  #<class 'list'>
 type(y)  #<class 'list_iterator'>
 '''
+
 자료 구조 별 파이썬에서 for문 구동 방식은
 > 딕셔너리의 순회는 키를 반환
 >> 딕셔너리에서 값을 반환시키고 싶을 경우 values() 이용
