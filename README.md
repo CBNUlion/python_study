@@ -12,4 +12,4 @@ python 3.7
 [@DJ-Yang](https://github.com/DJ-Yang)
 [@shinhaeran](https://github.com/shinhaeran)
 [@taem98](https://github.com/taem98)
-[@sehwa98](https://github.com/sehwa98)
+[@choisaywhy](https://github.com/choisaywhy)
