@@ -337,4 +337,150 @@ pprint(a=1, b=2, c=3) # {'a': 1, 'b': 2, 'c': 3}
 
 ### 4.7.7 일등 시민: 함수
 
-**파이썬의 모든 것은 객체(object)다!!** 파이썬의 함수는 일등 시민(first-class sitizen)이며 함수를 변수에 할당할 수 있고, 다른 함수에서 함수를 인자로 쓸 수 있으며, 함수에서 함수를 리턴할 수 있다
+**파이썬의 모든 것은 객체(object)다!!** 파이썬의 함수는 일등 시민(first-class sitizen)이며 함수를 변수에 할당할 수 있고, 다른 함수에서 함수를 인자로 쓸 수 있으며, 함수에서 함수를 리턴할 수 있다.
+
+```python
+def pprint():
+    print('hello world')
+
+type(pprint) # function
+```
+
+가변 위치 인자를 사용한 예제이다.
+
+```python
+def sum_everything(*args):
+    return sum(args)
+
+print(sum_everything(1, 2, 3, 4, 5)) # 15
+```
+
+### 4.7.8 내부 함수
+
+함수 안에 함수가 있을 수 있다.
+
+**루프나 코드 중복을 피하기 위해 또 다른 함수 내에 어떤 복잡한 작업을 한 번 이상 수행할 때 유용하게 사용된다.**
+
+```python
+def outer(a, b):
+    def inner(c, d):
+        return c + d
+    return inner(a, b)
+
+outer(1, 2) # 3
+```
+
+### 4.7.9 클로저
+
+**클로저는 다른 함수에 의해 동적으로 생성된다.** 바깥 함수로부터 생성된 변수값을 변경하고, 저장할 수 있는 함수이다.
+
+```python
+def outer(saying):
+    def inner():
+        return saying
+    return inner
+
+a = outer('hello world')
+b = outer('what r u doing??')
+
+type(a) # function
+type(b) # function
+
+# 함수이면서 클로저이기도 한다
+a # <function __main__.outer.<locals>.inner()>
+b # <function __main__.outer.<locals>.inner()>
+
+# outer 함수는 inner 함수를 호출하는 것이 아닌 리턴만 하기 때문에
+# a()와 같은 형식으로 사용해야 inner 함수를 호출하는 것이 된다
+a() # 'hello world'
+b() # 'whar r u doing??'
+```
+
+### 4.7.10 익명 함수: lambda()
+
+이름이 없는 함수이다. ~~콜백함수 같다~~
+
+## 4.8 제너레이터
+
+시퀀스를 생성하는 객체다. 전체 시퀀스를 한 번에 메모리에 생성하고 사용할 필요 없이, 잠재적으로 큰 시퀀스를 순회할 수 있다. **이터레이터에 대한 데이터 소스로 자주 사용된다.**
+
+> ex) range() 함수는 제너레이터 객체를 리턴한다.
+
+**제너레이터를 순회할 때마다 마지막으로 호출된 항목을 기억하고 다음 값을 리턴한다.** 일반 함수는 return으로 값은 한번에 리턴하지만 제너레이터는 yield를 이용해서 값을 반환한다.
+
+```python
+def crange(start=0, stop=10, step=1):
+    n = start
+    while n < stop:
+        yield n
+        n += step
+
+ranger = crange(1, 5)
+
+ranger # <generator object crange at 0x108f12480>
+for n in ranger:
+    print(n)
+
+# 1
+# 2
+# 3
+# 4
+```
+
+## 4.9 데코레이터
+
+**하나의 함수를 인자로 받아서 또 다른 함수를 리턴하는 함수이다.** 아래와 같은 이론을 알아야 이해하는 데에 어려움이 없다.
+
+- \*args \*\*kwargs
+- 내부 함수 및 클로저
+- 함수 인자
+
+예시 코드를 보자
+
+```python
+def document_it(func):
+    def inner(*args, **kwargs):
+        print("args: {}".format(args))
+        print("kwargs: {}".format(kwargs))
+        print("func name: {}".format(func.__name__))
+        result = func(*args, **kwargs)
+        print("result: {}".format(result))
+        return result
+        return inner
+    return inner
+
+def csum(a, b):
+    return a + b
+
+# 수동으로 데코레이터를 할당하는 과정
+a = document_it(csum)
+a(1, 2) # 3
+# args: (1, 2)
+# kwargs: {}
+# func name: csum
+# result: 3
+
+# 데코레이터 적용하기
+@document_it
+def csum(a, b):
+    return a + b
+
+csum(1, 2) # 3
+# args: (1, 2)
+# kwargs: {}
+# func name: csum
+# result: 3
+```
+
+### 4.10.1 이름에 \_와 \_\_사용
+
+**두 개의 언더스코어(\_\_)로 시작하고 끝나는 이름은 파이썬이 내부적으로 사용하는 예약어이다.** 그러므로 변수 또는 함수를 만들때 언더스코어 두 개로 이루어진 이름은 사용하면 안된다.
+
+> 함수이름: function.**name**
+> 함수의 doc: function.**doc**
+
+## 4.11 에러 처리하기: try, except
+
+파이썬에서 에러가 발생할 때 실행되는 코드인 예외를 사용한다. **모든 잠재적인 에러를 방지하기 위해 적절한 예외 처리가 필요하다!!**
+
+적어도 사용자에게 어떤 에러가 발생했는 지는 알리고 프로그램이 종료되는 것이 바람직하기 때문에 예외가 발생할 수 있는 모든 곳에 예외 처리를 해주는 습관은 매우 좋다.
