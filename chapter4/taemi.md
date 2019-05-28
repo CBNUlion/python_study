@@ -25,7 +25,7 @@
 ### 4.3.1 True 와 False
 
 - False로 간주되는 값들
-'''
+'''python
 요소               False
 
 null               NONE
@@ -79,7 +79,7 @@ null               NONE
 - zip() 함수 이용하기
     - 두개의 튜플을 만들기 위해 zip을 사용한다
         - zip()에 의해 반환되는 값은 튜플이나 리스트가 자신이 아니라 하나로 반환될 수 있는 순회 가능한 값
-'''
+'''python
 ex.
     list(zip(튜플, 튜플))  ==> [(,),(,),(,)]
     dict(zip(튜플, 튜플)) ==> {'':'','':'','':''}
@@ -123,7 +123,7 @@ ex.
     - [(row, col) for row in rows for col in cols]
         - rows가 더 큰 루프, cols는 rows안의 루프
         - 튜플 언패킹도 가능
-'''
+'''python
 ex.
 cells = [(row, col) for row in rows for col in cols]
 for row, col in cells:
@@ -135,7 +135,7 @@ for row, col in cells:
 - {키_표현식 : 값_표현식 for 표현식 in 순회 가능한 객체}
     - if테스트 가능
     - 다중 for문 가능
-'''
+'''python
 ex1. 
 name = 'taemi'
 name_counts = {taemi : name.count(taemi) for taemi in name}
@@ -195,7 +195,7 @@ ex. 함수이름(인자이름 = '값')
 - 기본 매개 변수 값 지정
     - 호출자가 인자를 제공하지 않음 : 기본 매개변수 값 들어감
     - 호출자가 인자를 제공 : 입력한 인자 사용
-'''
+'''python
 ex. 
 def taemi(first = "park", second = "taemi"):
     print(first, second)
@@ -207,7 +207,7 @@ taemi('taemi', 'park') ==> taemi park
 
 - **포인터 아님**
 - 매개변수에서 위치 인자 변수들을 튜플로 묶는다.
-'''
+'''python
 ex. 
 def print_args(*args):
     print('positional argument tuple: ', args)
@@ -222,7 +222,7 @@ def print_args(*args):
 - 딕셔너리로 묶음
 - 인자의 이름 : 키
 - 키에 대응하는 딕셔너리 값 : 값
-'''
+'''python
 ex.
 def print_kwarge(kwargs):
     print(kwargs)
@@ -235,10 +235,10 @@ print_kwargs(first = "park", second = "taemi")
     - 순서대로 배치해야 함
 
 ### 4.7.6 docstring
-'''
+
 함수의 몸체 시작 부분에 문자열을 포함시켜 함수 정의에 문서(documentation)를 붙일 수 있다.
 이것이 함수의 **docstring**이다.
-'''
+
 - 사용 
     - 함수 내에 문자열을 포함시킴
         - 길어도 가능, 즉  '', "", ''' ''', 전부 가능
@@ -247,7 +247,7 @@ print_kwargs(first = "park", second = "taemi")
         - help(taemi)
 - 서식 없이 출력
     - print(taemi.__doc__)
-'''
+'''python
 ex.
 def taemi():
     'return taemi'
@@ -271,7 +271,7 @@ print(taemi.__doc__)
 - 객체 : 숫자, 문자열, 튜플, 리스트, 딕셔너리, **함수**
 - **함수를 변수에 할당 가능**
     - **다른 함수에서 이를 인자로 쓸 수 있음**
-'''
+'''python
 ex.
 def answer():
     print(42)
@@ -284,23 +284,23 @@ run_something(answer) ==> 42
 - **answer()**를 전달하는 것이 아니라 **answer**로 전달하는 것
 - 괄호가 없으면 함수도 다른 모든 객체와 마찬가지로 간주
 
-'''
+'''python
 def taemi ():
     return taemi
 type(taemi) ==> <class 'function'>
 type(taemi()) ==> <class 'function'>
 '''
-'''
+
 - func : 실행할 함수
 - arg1 : func 함수의 첫 번째 인자
 - arg2 : func 함수의 두 번째 인자
 사용 :
 def run_something_with_args(func, arg1, arg2):
     func(arg1, arg2)
-'''
-'''
-*args와 **kwargs인자와 결합 가능
 
+
+*args와 **kwargs인자와 결합 가능
+'''python
 def aum_args(*arg):
     return sum(args)
 '''
@@ -318,7 +318,7 @@ def aum_args(*arg):
         - return 즉 반환을 할 때, 이름을 호출하지 않고 반환
 - 다른 함수에 의해 동적 생성 ( 함수 안에 함수 정의 )
 - 바깥 함수로부터 생성된 변수값을 변경, 저장 가능
-'''
+'''python
 def knights2(saying):
     def inner2():
         return "say: '%s'" % saying
@@ -329,9 +329,10 @@ def knights2(saying):
 
 - 파이썬의 람다함수는 단일문으로 표현되는 익명함수
 - 사용 
-'''
+'''python
 ex.
 edit_story(stairs, lambda word: word.capitalize() + '!')
+'''
 
 함수의 두번 째 인자, 구성을 보면
 < lambda 인수 : 함수 내용 > 으로 구성이 되어 있다.
@@ -350,15 +351,13 @@ edit_story(stairs, lambda word: word.capitalize() + '!')
 - 잠재적으로 큰 시퀀스를 생성, 제너레이터 컴프리헨션에 대한 코드가 아주 긴 경우 사용
 - 일반 함수지만 return문으로 값을 반환하지 않음
     - 대신 **yield**문으로 값을 반환
-'''
-ex. 
+'''python
 <함수>
 def my_range(first = 0, last = 10, step = 1):
     number = first
     while number < last :
         yield number
         number += step
-
 <실행>
 my_range
 <\function my_range at 0x10193e268>
@@ -418,19 +417,10 @@ ranger
 ## 4.12 예외 만들기
 
 - 모든 예외는 파이썬 표준 라이브러리에 미리 정의되어 있음
-    - 필요햔 예외처리 선택해서 사용
+    - 필요한 예외처리 선택해서 사용
     - 예외 타입 정의 가능
         - class이용
         
-
-
-
-
-
-
-
-    
-
 
 # 헷갈리는 것
 - zip()함수를 사용한 for문
@@ -449,17 +439,13 @@ ranger
 
 
 # Q
-- 4.5 순회하기에서 데이터가 메모리에 맞지 않더라도
- 데이터 스트림을 처리할 수 있도록 허용한다는 말이 무슨 말인지 잘 모르겠다.
+
 - 117p에 튜플에서 키와 값을 모두 반환하기 위해서 ... 
     - ==> 여기부터 '튜플<->딕셔너리'오타 아닌가..?
-- 튜플을 만들려고 taemi = a,b,c 를 했는데 왜 오류가 나는 건지?
-- 122p 예제 불가
-taemi_list = []
-taemi_list = list(range(1,5)) ==> 예외 
-- 4.7.1 위치 인자 / 다른 언어와 다르게 인자를 독특하게 처리한다는데 왜..?
-- 수동적으로 데커레이터에 값을 넣어줄 때 함수가 실행되는 거 아닌가? 왜 함수 실행 아니라고 하지?
 
 
 
 
+# 스터디 후
+- else 한 번 더 찾아보기 
+- 제너레이터 이터레이터 차이점 다시 알아보기
