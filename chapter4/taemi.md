@@ -455,7 +455,7 @@ ranger
     - itertools.zip_longest(*terable, fillvalue=None)
 
 ```python
-zipped = zip_long,est(x, y, fillvalue = 0)
+zipped = zip_longest(x, y, fillvalue = 0)
 print(list(zipped))
 
 #결과
