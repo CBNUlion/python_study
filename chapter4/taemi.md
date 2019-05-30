@@ -25,7 +25,7 @@
 ### 4.3.1 True 와 False
 
 - False로 간주되는 값들
-'''python
+```python
 요소               False
 
 null               NONE
@@ -36,7 +36,7 @@ null               NONE
 빈 튜플               ()
 빈 딕셔너리           {}
 빈 셋                set()
-'''
+```
 
 ## 4.4 반복하기 : while
 
@@ -79,11 +79,11 @@ null               NONE
 - zip() 함수 이용하기
     - 두개의 튜플을 만들기 위해 zip을 사용한다
         - zip()에 의해 반환되는 값은 튜플이나 리스트가 자신이 아니라 하나로 반환될 수 있는 순회 가능한 값
-'''python
-ex.
-    list(zip(튜플, 튜플))  ==> [(,),(,),(,)]
-    dict(zip(튜플, 튜플)) ==> {'':'','':'','':''}
-'''
+```python
+
+    list(zip(튜플, 튜플))  # [(,),(,),(,)]
+    dict(zip(튜플, 튜플)) # {'':'','':'','':''}
+```
 ### 4.5.5 숫자 시퀀스 생성하기 : range()
 
 - 리스트나 튜플 같은 자료구조를 생성하여 저장하지 않더라도 특정 범위 내에서 숫자 스트림 반환
@@ -123,30 +123,32 @@ ex.
     - [(row, col) for row in rows for col in cols]
         - rows가 더 큰 루프, cols는 rows안의 루프
         - 튜플 언패킹도 가능
-'''python
-ex.
+```python
+
 cells = [(row, col) for row in rows for col in cols]
 for row, col in cells:
     print(row, col)
-''''
+
+```
 
 ### 4.6.2 딕셔너리 컴프리헨션
 
 - {키_표현식 : 값_표현식 for 표현식 in 순회 가능한 객체}
     - if테스트 가능
     - 다중 for문 가능
-'''python
-ex1. 
+ex1.
+```python 
 name = 'taemi'
 name_counts = {taemi : name.count(taemi) for taemi in name}
 name_counts
-==> {'t':1, 'a':1, 'e':1, 'm':1, 'i':1}
-        
+#{'t':1, 'a':1, 'e':1, 'm':1, 'i':1}
+```
 ex2.
+```python
 name ='taemi'
 taemi_counts = {taemi:name.count(taemi) for taemi in set(name)}
-==> {'t': 1, 'e': 1, 'a': 1, 'i': 1, 'm': 1}
-'''
+# {'t': 1, 'e': 1, 'a': 1, 'i': 1, 'm': 1}
+```
 
 - ex1, ex2를 비교해봤을 때 출력이 다른 것을 확인할 수 있다 
     - (name에 들어있는 문자열이 반복되면 더 잘 확인할 수 있다)
@@ -195,23 +197,22 @@ ex. 함수이름(인자이름 = '값')
 - 기본 매개 변수 값 지정
     - 호출자가 인자를 제공하지 않음 : 기본 매개변수 값 들어감
     - 호출자가 인자를 제공 : 입력한 인자 사용
-'''python
-ex. 
+```python
+
 def taemi(first = "park", second = "taemi"):
     print(first, second)
-taemi() ==> park taemi
-taemi('taemi', 'park') ==> taemi park
-'''
+taemi() # park taemi
+taemi('taemi', 'park') #taemi park
+```
 
 ### 4.7.4 위치 인자 모으기 : *
 
 - **포인터 아님**
 - 매개변수에서 위치 인자 변수들을 튜플로 묶는다.
-'''python
-ex. 
+```python 
 def print_args(*args):
     print('positional argument tuple: ', args)
-'''
+```
 - 이처럼 사용할 때는 그냥 args라고 쓰면 됨
 - 인자가 들어가지 않으면 빈 튜플 생성
 - *를 사용할 때 가변 인자의 이름으로 args를 사용할 필요는 없음
@@ -222,14 +223,13 @@ def print_args(*args):
 - 딕셔너리로 묶음
 - 인자의 이름 : 키
 - 키에 대응하는 딕셔너리 값 : 값
-'''python
-ex.
+```python
 def print_kwarge(kwargs):
     print(kwargs)
 
 print_kwargs(first = "park", second = "taemi")
-==> {'first': 'park', 'second':'taemi'}
-'''
+#{'first': 'park', 'second':'taemi'}
+```
 
 - 위치 매개변수와 *args, **kwargs를 섞어서 사용하려면
     - 순서대로 배치해야 함
@@ -247,22 +247,21 @@ print_kwargs(first = "park", second = "taemi")
         - help(taemi)
 - 서식 없이 출력
     - print(taemi.__doc__)
-'''python
-ex.
+```python
 def taemi():
     'return taemi'
     return taemi
 
 help(taemi)
 
-==>Help on function taemi in module __main__:
-==>
-==>taemi()
-==> return taemi
+#Help on function taemi in module __main__:
+#
+#taemi()
+# return taemi
 
 print(taemi.__doc__)
-==> return taemi
-'''
+# return taemi
+```
 
 ### 4.7.7 일등 시민 : 함수
  
@@ -271,25 +270,24 @@ print(taemi.__doc__)
 - 객체 : 숫자, 문자열, 튜플, 리스트, 딕셔너리, **함수**
 - **함수를 변수에 할당 가능**
     - **다른 함수에서 이를 인자로 쓸 수 있음**
-'''python
-ex.
+```python
 def answer():
     print(42)
 
 def run_something(func):
     func()
 
-run_something(answer) ==> 42
-'''
+run_something(answer) # 42
+```
 - **answer()**를 전달하는 것이 아니라 **answer**로 전달하는 것
 - 괄호가 없으면 함수도 다른 모든 객체와 마찬가지로 간주
 
-'''python
+```python
 def taemi ():
     return taemi
-type(taemi) ==> <class 'function'>
-type(taemi()) ==> <class 'function'>
-'''
+type(taemi) #<class 'function'>
+type(taemi()) # <class 'function'>
+```
 
 - func : 실행할 함수
 - arg1 : func 함수의 첫 번째 인자
@@ -300,10 +298,10 @@ def run_something_with_args(func, arg1, arg2):
 
 
 *args와 **kwargs인자와 결합 가능
-'''python
+```python
 def aum_args(*arg):
     return sum(args)
-'''
+```
 
 ### 4.7.8 내부 함수
 
@@ -318,21 +316,20 @@ def aum_args(*arg):
         - return 즉 반환을 할 때, 이름을 호출하지 않고 반환
 - 다른 함수에 의해 동적 생성 ( 함수 안에 함수 정의 )
 - 바깥 함수로부터 생성된 변수값을 변경, 저장 가능
-'''python
+```python
 def knights2(saying):
     def inner2():
         return "say: '%s'" % saying
     return inner2
-'''
+```
 
 ### 4.7.10 익명함수 : lambda()
 
 - 파이썬의 람다함수는 단일문으로 표현되는 익명함수
 - 사용 
-'''python
-ex.
+```python
 edit_story(stairs, lambda word: word.capitalize() + '!')
-'''
+```
 
 함수의 두번 째 인자, 구성을 보면
 < lambda 인수 : 함수 내용 > 으로 구성이 되어 있다.
@@ -351,22 +348,22 @@ edit_story(stairs, lambda word: word.capitalize() + '!')
 - 잠재적으로 큰 시퀀스를 생성, 제너레이터 컴프리헨션에 대한 코드가 아주 긴 경우 사용
 - 일반 함수지만 return문으로 값을 반환하지 않음
     - 대신 **yield**문으로 값을 반환
-'''python
-<함수>
+```python
+
 def my_range(first = 0, last = 10, step = 1):
     number = first
     while number < last :
         yield number
         number += step
-<실행>
-my_range
-<\function my_range at 0x10193e268>
 
-< 제너레이터 반환 객체 >
+my_range
+#<function my_range at 0x10193e268>
+
+#제너레이터 반환 객체
 ranger = my_range(1,5)
 ranger
-<\generator object my_range at 0x101a0a168>
-'''
+#<generator object my_range at 0x101a0a168>
+```
 - 함수 실행
     - 함수 뜸 
 - 함수에서 반환되는 객체를 받아서 실행
@@ -437,15 +434,195 @@ ranger
 - 클로저는 다른 함수에 의해 동적 생성이 된다.
 
 
-
 # Q
 
 - 117p에 튜플에서 키와 값을 모두 반환하기 위해서 ... 
     - ==> 여기부터 '튜플<->딕셔너리'오타 아닌가..?
 
-
-
-
 # 스터디 후
 - else 한 번 더 찾아보기 
 - 제너레이터 이터레이터 차이점 다시 알아보기
+
+# 두번 째 공부
+
+## zip() 함수 이용
+
+### zip() 함수 최대길이에 맞춰 사용하기
+
+- import하기 
+    - from itertools import zip_longest
+- 사용법
+    - itertools.zip_longest(*terable, fillvalue=None)
+
+```python
+zipped = zip_long,est(x, y, fillvalue = 0)
+print(list(zipped))
+
+#결과
+#[(1, 4), (2, 5), (3, 6), (0, 7)]
+```
+
+## 이터레이터와 제너레이터
+
+[관련 블로그](https://mingrammer.com/translation-iterators-vs-generators/)
+
+### 컨테이너(Container)
+- 원소들을 가지고 있는 데이터구조
+- 멤버쉽 테스트 지원
+- 메모리에 상주 ( 보통 모든 원소값을 메모리에 가지고 있음)
+- 컨테이너 종류
+    - **list**, deque, ...
+    - **set**, frozonset, ...
+    - **dict**, defaultdict, OderedDict, Counter, ...
+    - **tuple**, namedtuple, ...
+    - **str**
+- 특정한 원소를 포함하고 있는지 판단 가능
+    - 딕셔너리는 키 값으로 판단
+```python
+#여기서 assert는 뒤의 조건이 True가 아니면 AssertError를 발생
+>>> assert 1 in [1,2,3]
+>>> assert 1 in {1:'part', 2:'taemi'}
+>>> assert 4 not in {1:'part', 2:'taemi'}
+>>> assert 'p' in 'park'
+>>> assert 'park' in 'parktaemi' #문자열은 부분 문자열 모두 "포함"
+```
+- 마지막예제
+    - 문자열은 모든 부분문자열들의 리터럴 복사본을 메모리에 저장하고 있지는 않음
+- 컨테이너로 원소를 생성하는 기능은 이를 컨테이너가 아니라 이터레이터로 만듦
+- 이터레이블하지 않은 컨테이너 : Bloom filter
+    - 특정 원소를 포함하고 있는지 판단가능
+    - 각각의 개별 원소 반환 x
+
+### 이터레이블(Iterable)
+- 컨테이너
+    - 컨테이터가 유한할 경우 이터레이블은 무한한 데이터 소스 나타내기 가능
+- 이외에, 파일열기, 소켓 열기 등등..
+- 반드시 데이터 구조일 필요 x
+    - 이터레이터를 반한할 수 있는 객체면 가능
+- **이터레이블이 iter()로 반환한 것이 이터레이터**
+- 이터레이블로 for문을 돌리게 되면 iter를 실행시키는데 필요한 GET_ITER를 호출
+
+### 이터레이터(Iterator)
+- next()를 호출할 때 다음 값을 생성해내는 상태를 가진 헬퍼 객체
+- next()를 가진 모든 객체는 이터레이터
+
+```python
+# itertools의 모든 함수는 이터레이터를 반환
+>>> from itertools import count
+>>> counter = count (start=13)
+>>> next(counter)
+13
+>>> next(counter)
+14
+```
+- 클래스 안에 iter()와 next()가 둘 다 있으면?
+
+### 제너레이터(Generator)
+- 특별한 종류의 이터레이터
+- 모든 제너레이터는 이터레이터
+- 값을 그 때 그 때 생성
+- yield 사용
+- 값을 넘길 때 객체화 해서 넘김
+```python
+>>> def fib():
+...     prev, curr = 0, 1
+...     while True:
+...         yield curr
+...         prev, curr = curr, prev + curr
+...
+>>> f = fib() #여기서 fib()안 쪽 내용은 아직 실행되지 않음
+>>> list(islice(f, 0, 10)) # 호출 시 실행, islice는 f인스턴스에서 next를 호출
+[1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+
+# yield는 하나 값을 반환하며 함수 실행은 거기서 멈춤
+#islice가 list에 값을 하나 저장하고 다시 f에게 다음값을 요청
+# 이때 f는 yield 밑에 코드부터 실행 
+# 다음 yield를 만나 다음 curr값을 반환
+```
+
+#### 제너레이터의 타입
+
+1. 제너레이터 함수 (function)
+    - 몸체에 yield 키워드가 나타나는 모든 함수
+2. 제너레이터 표현 (expressions)
+3. 리스트 컴프리헨션(list comprehension)과 동일한 제너레이터
+    - 튜플을 리스트컴프리헨션의 형태로 사용하면 제너레이터가 된다.
+
+```python
+>>> number = [1,2,3,4,5]
+>>> [x*x for x in number]
+[1, 4, 9, 16, 25]
+>>> {x*x for x in  number}
+{1, 4, 9, 16, 25}
+>>> (x*x for x in number)
+<generator object <genexpr> at 0x0000027424643F10>
+```
+```python
+>>> gen = (x*x for x in number)
+>>> next(gen)
+1
+>>> list(gen)
+[4,9,16,25]         #이걸 게으른 행동이라고 부른다
+```
+## 데코레이터 ( decorator )
+[참고](https://bluese05.tistory.com/30)
+
+- 함수 앞에 @붙여서 써진 것
+- 대상 함수를 wrapping하고, 이 wrapping된 함수의 앞뒤에 추가적으로 꾸며질 구문 들을 정의해서 손쉽게 재사용
+##### 어떨 때 사용하는지?
+- 메인 구문이 있고, 부가적인 구문을 추가하고 싶을 때
+- 그리고 이 부가적인 구문을 반복해서 사용하고 싶은 경우
+##### 사용하면 좋은 점은?
+- main함수에 대한 가독성이 좋아짐
+- 같은 패턴을 100번 해야한다고 할 때 main에 직접 코드를 넣는 것보다 간결하고 간편하다.
+##### 사용법
+- 함수내에서 사용하고 싶으면?
+```python
+import datetime
+
+def datetime_decorator(func): #decorator역할을 하는 함수 데커레이터가 적용될 함수를 인자로 받는다
+        def decorated():        #원하는 작업 
+                print datetime.datetime.now()
+                func()
+                print datetime.datetime.now()
+        return decorated
+
+@datetime_decorator         # 데코레이터 선언
+def main_function_1():
+        print "MAIN FUNCTION 1 START"
+
+#출처: https://bluese05.tistory.com/30 [ㅍㅍㅋㄷ]
+```
+- class내에서 사용하고 싶으면?
+```python
+import datetime
+
+class DatetimeDecorator:
+        def __init__(self, f):
+                self.func = f
+
+        def __call__(self, *args, **kwargs): #call함수로 decorator형식 정의
+                print datetime.datetime.now()
+                self.func(*args, **kwargs)
+                print datetime.datetime.now()
+
+class MainClass:
+        @DatetimeDecorator
+        def main_function_1():
+                print "MAIN FUNCTION 1 START"
+
+#출처: https://bluese05.tistory.com/30 [ㅍㅍㅋㄷ]
+```
+## 컴프리헨션
+
+- [컴프리헨션에서 표현식을 2개 이상 쓰지 말기](https://excelsior-cjh.tistory.com/132)
+- 리스트 컴프리헨션은 다중 루프와 루프 레벨별 다중 조건을 지원
+- 표현식 두 개가 넘는 컴프리헨션은 이해가 어려우므로 피해야한다.
+
+## 추가 
+- rendering 
+    - rendering은 renderer engine이 함
+    - render은 html로 입력 받아 해석해서 모니터로 출력
+
+## Q
+- 컨테이너가 이터레이블하면 왜 무한한 데이터 소스를 나타낼 수 있는지
