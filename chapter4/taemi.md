@@ -455,6 +455,8 @@ ranger
     - itertools.zip_longest(*terable, fillvalue=None)
 
 ```python
+x = [1,2,3]
+y = [1,2,3,4]
 zipped = zip_longest(x, y, fillvalue = 0)
 print(list(zipped))
 
@@ -523,6 +525,8 @@ print(list(zipped))
 - 값을 그 때 그 때 생성
 - yield 사용
 - 값을 넘길 때 객체화 해서 넘김
+- 일반 함수는 진입점이 하나라고 하면 제너레이터는 진입점이 여러개
+    - 원하는 시점에 데이터를 넘겨 받을 수 있다.
 ```python
 >>> def fib():
 ...     prev, curr = 0, 1
@@ -538,10 +542,31 @@ print(list(zipped))
 #islice가 list에 값을 하나 저장하고 다시 f에게 다음값을 요청
 # 이때 f는 yield 밑에 코드부터 실행 
 # 다음 yield를 만나 다음 curr값을 반환
-```
 
 #### 제너레이터의 타입
+```
+[예제](https://winterj.me/Python-Generator/)
+```python
+>>> def generator():
+...     yield 1
+...     yield 'string'
+...     yield True
 
+>>> gen = generator()
+>>> gen
+<generator object generator at 0x10a47c678>
+>>> next(gen)
+1
+>>> next(gen)
+'string'
+>>> next(gen)
+True
+>>> next(gen)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+
+```
 1. 제너레이터 함수 (function)
     - 몸체에 yield 키워드가 나타나는 모든 함수
 2. 제너레이터 표현 (expressions)
