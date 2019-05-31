@@ -542,9 +542,9 @@ print(list(zipped))
 #islice가 list에 값을 하나 저장하고 다시 f에게 다음값을 요청
 # 이때 f는 yield 밑에 코드부터 실행 
 # 다음 yield를 만나 다음 curr값을 반환
-
-#### 제너레이터의 타입
 ```
+#### 제너레이터의 타입
+
 [예제](https://winterj.me/Python-Generator/)
 ```python
 >>> def generator():
@@ -589,6 +589,13 @@ StopIteration
 >>> list(gen)
 [4,9,16,25]         #이걸 게으른 행동이라고 부른다
 ```
+
+### 이점
+- list, set, dict는 유용하지만 큰 값을 다룰 때는 별로 좋지 않다.
+- generator는 yield를 통해 필요한 값을 필요한 때에만 받아 쓰기 때문에 더 유용
+
+
+
 ## 데코레이터 ( decorator )
 [참고](https://bluese05.tistory.com/30)
 
