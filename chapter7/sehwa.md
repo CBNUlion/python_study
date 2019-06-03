@@ -36,11 +36,17 @@ def unicode_test(value):
 'unicode-escape'     파이썬 유니코드 리터럴 형식 (\nxxxx 또는 \Uxxxxxxxx)
 ```
 > ** encode('[인코딩 이름]') **
+
 > ** encode('[인코딩 이름]', 'ignore') **           : 알 수 없는 문자를 인코딩 하지 않는다.
+
 > ** encode('[인코딩 이름]', 'replace') **          : 알 수 없는 문자를 ?로 대체한다
+
 > ** encode('[인코딩 이름]', 'backslashreplace') ** : 알 수 없는 문자를 파이썬의 역 슬래시 이스케이프 시퀀스로 대체한다.
+
 > ** encode('[인코딩 이름]', 'xmlcharrefreplace') **   : 알 수 없는 문자를 적절한 XML 문자 참조 &#nnn; 로 대체한다.
+
 > 이외 namereplace, strict, surrogateescape 가 있다.
+
 > <참고> 파이썬 내장함수 : https://docs.python.org/ko/3/library/functions.html
 >
 > #### 바이트를 문자열로 **디코딩**
@@ -53,7 +59,8 @@ def unicode_test(value):
 > 포맷을 사용하여 데이터값을 문자열에 끼워넣는다.
 > #### ' # '
 > 변환타입
-> ```python
+
+```python
 %s              문자열
 %d              10진 정수
 %x              16진 정수
@@ -63,6 +70,7 @@ def unicode_test(value):
 %g              10진 부동소수점수 혹은 지수로 나타낸 부동소수점수
 %%              리터럴 %
 ```
+
 > '%☆d' : 각 변수에 최소 ☆자의 필드를 설정하고, 오른쪽으로 정렬한다. 
 > '%-☆d' : 각 변수에 최소 ☆자의 필드를 설정하고, 왼쪽으로 정렬한다.
 > '%☆.★d' : 각 변수에 최소 ☆자의 필드를 설정하고, 최대 문자 길이를 ★로 제한하며, 오른쪽으로 정렬한다.
@@ -89,6 +97,7 @@ def unicode_test(value):
 >
 > #### 패턴
 > - 특수문자
+
 ```python
 \d              숫자
 \D              비숫자
