@@ -10,7 +10,7 @@
 > 기본 평면 : \u + 4자리 16진수(평면 번호 + 평면에 있는 문자의 인덱스)
 > 높은 평면 : \U + 8자리 16진수
 > <참고> 유니코드 : https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%88%EC%BD%94%EB%93%9C_0000~0FFF
->```python
+```python
 
 import unicodedata
 
@@ -28,7 +28,7 @@ def unicode_test(value):
 > - 4바이트 : 아시아 언어 및 기호를 포함한 나머지
 >
 > 인코딩 방식
-> ```python
+```python
 'ascii'              7비트의 아스키코드
 'utf-8'              8비트 가변 길이 인코딩 형식, 거의 대부분의 문자 지원
 'latin-1'            ISO 8859-1로도 알려짐
@@ -89,7 +89,7 @@ def unicode_test(value):
 >
 > #### 패턴
 > - 특수문자
-> ```python
+```python
 \d              숫자
 \D              비숫자
 \w              알파벳 문자
@@ -101,7 +101,7 @@ def unicode_test(value):
 ```
 
 > - 지정자
-> ```python
+```python
 abc             리터럴 abc
 \D              비숫자
 \w              알파벳 문자
@@ -131,7 +131,7 @@ abc             리터럴 abc
 > ** import struct **
 >
 > 형식 지정자
-> ```python
+```python
 x              1 바이트 건너뜀             1
 b              부호 있는 바이트             1
 B              부호 없는 바이트             1
@@ -167,7 +167,7 @@ s              문자                      count
 ### 7.2.5 비트 연산자
 
 > 비트단위 연산자
-> ```python
+```python
 &              AND
 |              OR
 ^              배타적 OR
