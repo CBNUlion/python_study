@@ -12,7 +12,7 @@
 
 > **sys.argv**
 > 프로그램 실행 시 인자를 list()형식으로 반환해준다.
-> ```python
+```python
 import sys
 
 if len(sys.argv) is 1:
@@ -46,18 +46,18 @@ for i in range(len(sys.argv)):
 ### 5.3.2 다른 이름으로 모듈 임포트하기
 
 > as를 사용하여 다른 이름으로 임포트할 수 있다.
-> ** import [모듈] as [다른 이름] **
+> **import [모듈] as [다른 이름]**
 
 ### 5.3.3 필요한 모듈만 임포트하기
 
 > 모듈 전체 혹은 모듈의 필요한 부분만 임포트할 수 있다.
-> ** from [모듈] import [모듈의 함수] ** 
-> ** from [모듈] import [모듈의 함수] as [다른 이름] **
+> **from [모듈] import [모듈의 함수]** 
+> **from [모듈] import [모듈의 함수] as [다른 이름]**
 
 ### 5.3.4 모듈 검색 경로
 
 > 모듈의 경로 출력
-> ```python
+```python
 import sys
 
 for place in sys.path:
@@ -85,19 +85,19 @@ for place in sys.path:
 
 ### 5.5.2 항목 세기 : Counter()
 
-> ** from collections import Counter **
+> **from collections import Counter**
 > - most_common()을 이용해 모든 요소를 내림차순으로 반환한다.
 > - '+' 와 '-' 연산자를 사용할 수 있다.
 > - '&' 와 '|' 연산자를 사용할 수 있다.
 
 ### 5.5.3 키 정렬하기 : OrderedDict()
 
-> ** from collections import OrderedDict **
-> ** OrderedDict([('key1':'value1'), ('key2':'value2')]) **
+> **from collections import OrderedDict**
+> **OrderedDict([('key1':'value1'), ('key2':'value2')])**
 
 ### 5.5.4 스택 + 큐 == 데크
 
-> ** from collections import deque **
+> **from collections import deque**
 >
 >      =========================
 >          |    |    |    |    |  ** 스택 **
