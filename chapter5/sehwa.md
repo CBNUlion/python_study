@@ -5,13 +5,16 @@
 ## 5.1 스탠드얼론 프로그램
 
 OS으로부터 독립하여 자체적으로 실행이 가능한 프로그램
+
 대화식 인터프리터 실행 대신 .py 파일을 만들고 터미널에서 실행한다. 
 
 
 ## 5.2 커맨드 라인 인자
 
 **sys.argv**
+
 프로그램 실행 시 인자를 list()형식으로 반환해준다.
+
 ```python
 import sys
 
@@ -34,8 +37,11 @@ for i in range(len(sys.argv)):
 ## 5.3 모듈과 import문
 
 프로그램이 길어짐에 따라, 유지를 위해 여러 개의 파일로 나눈다.
+
 여러 프로그램에 썼던 편리한 함수의 정의를 복사하지 않고도 사용할 수 있다.
+
 --> 모듈
+
 import문을 통해 모듈의 코드를 참조한다.
 
 ### 5.3.1 모듈 임포트하기
@@ -46,17 +52,21 @@ import문을 통해 모듈의 코드를 참조한다.
 ### 5.3.2 다른 이름으로 모듈 임포트하기
 
 as를 사용하여 다른 이름으로 임포트할 수 있다.
+
 **import [모듈] as [다른 이름]**
 
 ### 5.3.3 필요한 모듈만 임포트하기
 
 모듈 전체 혹은 모듈의 필요한 부분만 임포트할 수 있다.
+
 **from [모듈] import [모듈의 함수]** 
+
 **from [모듈] import [모듈의 함수] as [다른 이름]**
 
 ### 5.3.4 모듈 검색 경로
 
 모듈의 경로 출력
+
 ```python
 import sys
 
@@ -68,9 +78,11 @@ for place in sys.path:
 중복된 이름의 모듈이 있다면, 첫 번째 조건을 사용한다.
 
 > <참고> https://docs.python.org/ko/3/tutorial/modules.html
+
 ## 5.4 패키지
 
 패키지는 모듈을 디렉토리 형식으로 구조화한 것이다.
+
 > <참고> https://offbyone.tistory.com/106
 
 
@@ -80,12 +92,14 @@ for place in sys.path:
 
 ### 5.5.1 누락된 키 처리하기 : setdefault(), defaultdict()
 
-setdefault() : get()함수와 같은 역할, 키가 누락된 경우 항목을 할당할 수 있다.
-defaultdict() : setdefault()함수와 같은 역할, 함수의 인자를 누락된 키에 할당한다.
+- setdefault() : get()함수와 같은 역할, 키가 누락된 경우 항목을 할당할 수 있다.
+
+- defaultdict() : setdefault()함수와 같은 역할, 함수의 인자를 누락된 키에 할당한다.
 
 ### 5.5.2 항목 세기 : Counter()
 
 **from collections import Counter**
+
 - most_common()을 이용해 모든 요소를 내림차순으로 반환한다.
 - '+' 와 '-' 연산자를 사용할 수 있다.
 - '&' 와 '|' 연산자를 사용할 수 있다.
@@ -113,6 +127,7 @@ defaultdict() : setdefault()함수와 같은 역할, 함수의 인자를 누락된 키에 할당한다
       =========================
 
 사용할 수 있는 함수
+
  - append
  - appendleft
  - count
@@ -126,6 +141,7 @@ defaultdict() : setdefault()함수와 같은 역할, 함수의 인자를 누락된 키에 할당한다
  - remove
 
 ### 5.5.5 코드 구조 순회하기 : itertools
+
  - chain() : 순회 가능한 인자를 하나씩 반환한다.
  - cycle() : 인자를 무한으로 순환한다.
  - accumulate(,fun) : 축적된 값을 토대로 계산한다.
