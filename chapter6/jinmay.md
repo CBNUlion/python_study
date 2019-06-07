@@ -406,4 +406,245 @@ class A():
     @classmethod
     def kids(cls):
         print("A class has {} objects.".format(cls.count))
+
+a = A()
+b = A()
+b.kids() # A class has 2 objects.
+c = A()
+b.kids() # A class has 3 objects.
+c.kids() # A class has 3 objects.
 ```
+
+클래스 정의에서 메서드의 세 번째 타입은 클래스나 객체에 영향을 미치지 못한다. 편의를 위해 존재하는 것이다. **정적 메서드는 @staticmethod 데코레이터를 사용하며, 첫 번째 매개변수로 self나 cls가 없다.**
+
+```python
+class A():
+    @staticmethod
+    def commercial():
+        print("this A has been brought to you by Acme")
+
+A.commercial() # this A has been brought to you by Acme
+```
+
+**static 메서드에 접근하기 위해서 클래스로부터 객체를 생성할 필요가 없다.** 바로 클래스를 통해서 메서드를 사용하면 된다.
+
+## 6.11 덕 타이핑
+
+파이썬은 다형성을 느슨하게 구현했다. **이것은 클래스에 상관없이 같은 동작을 다른 객체에 적용할 수 있다는 것을 의미한다.**
+
+```python
+class Quote():
+    def __init__(self, person, words):
+        self.person = person
+        self.words = words
+
+    def who(self):
+        return self.person
+
+    def says(self):
+        return self.words + '.'
+
+class QuestionQuote(Quote):
+    def says(self):
+        return self.words + '?'
+
+class ExclamationQuote(Quote):
+    def says(self):
+        return self.words + '!'
+
+hunter = Quote('Elmer Fudd', "I'm hunting wabbits")
+print(hunter.who(), 'says:', hunter.says()) # Elmer Fudd says: I'm hunting wabbits.
+
+hunted1 = QuestionQuote('Bugs Bunny', "What's up, doc")
+print(hunter.who(), 'says:', hunted1.says()) # Elmer Fudd says: What's up, doc?
+
+hunted2 = ExclamationQuote('Daffy Duck', "It's rabbit season")
+print(hunted2.who(), 'says:', hunted2.says()) # Daffy Duck says: It's rabbit season!
+```
+
+위의 세 개의 서로 다른 says() 메서드는 세 클래스에 대해 서로 다른 동작을 제공한다. 이것이 **객체 지향 언어에서 전통적인 다형성의 특징이다.** 파이썬은 who()와 says() 메서드를 갖고 있는 모든 객체에서 이 메서드들을 실행할 수 있게 해준다.
+
+```python
+class BabblingBrook():
+    def who(self):
+        return 'Brook'
+
+    def says(self):
+        return 'Babble'
+
+brook = BabblingBrook()
+```
+
+다양한 객체의 who()와 says() 메서드를 실행해보자. brook 객체는 다른 객체와 전혀 관계가 없다.
+
+```python
+def who_says(obj):
+    print(obj.who(), 'says', obj.says())
+
+who_says(hunter) # Elmer Fudd says I'm hunting wabbits.
+who_says(hunted1) # Bugs Bunny says What's up, doc?
+who_says(hunted2) # Daffy Duck says It's rabbit season!
+who_says(brook) # Brook says Babble
+```
+
+이러한 행위를 **덕 타이핑**이라고 부른다. Quote 클래스와 BabblingBrook 클래스는 전혀 상관관계가 없지만 각 클래스의 객체를 호출하는 who_says() 함수에 의해 정상적으로 실행된다. 즉, 덕 타이핑이란 **실제 타입(클래스)은 상관하지 않고, 구현된 메서드로만 판단하는 방식**을 의미한다.
+
+> **속성과 메소드 존재에 의해 객체의 적합성이 결정된다.**
+
+> 파이썬 튜토리얼은 덕 타이핑을 아래와 같이 설명하고 있다.
+>
+> 객체의 타입을 다른 타입 객체와의 명시적인 관계를 비교하는 것이 아니라, 그 객체의 메서드나 속성들을 비교함으로써 판별하는 파이썬적인 프로그래밍 스타일이다. (“오리처럼 보이고, 오리처럼 운다면 오리임에 틀림없다.”) 특정 타입 대신 인터페이스를 강조함으로써, 잘 디자인된 코드는 다형적 대체를 허용함으로써 유연성을 향상시킬 수 있다. 덕 타이핑을 이용하면 type()이나 isinstance()를 이용한 테스트를 하지 않는다. 대신, 대개 hasattr() 테스트를 이용하거나, 혹은 EAFP (Easier to ask forgiveness than permission; 하고 나서 용서를 비는 것이 하기 전에 허락을 구하는 것보다 쉽다) 프로그래밍 기법을 이용한다.
+
+## 6.12 특수 메서드
+
+파이썬의 특수 메서드는 두 언더스코어(\_\_)로 시작하고 끝난다.
+
+Word 클래스와 두 단어를 비교하는 equals() 메서드를 만들어 보자
+
+```python
+class Word():
+    def __init__(self, text):
+        self.text = text
+
+    def equals(self, text2):
+        return self.text.lower() == text2.text.lower()
+
+a = Word('ha')
+b = Word('HA')
+c = Word('eh')
+
+a.equals(b) # True
+```
+
+파이썬의 내장된 타입처럼 a == b와 같이 비교할수 있게 만들어보자
+
+```python
+class Word():
+    def __init__(self, word):
+        self.word = word
+
+    def __eq__(self, word2):
+        return self.word.lower() == word2.word.lower()
+
+a = Word('ha')
+b = Word('HA')
+c = Word('eh')
+
+a == b # True
+a == c # False
+```
+
+\_\_eq\_\_()는 같은지 판별하는 파이썬의 특수 메서드이다.
+
+파이썬의 특수 메서드는 아래와 같다.
+
+- 비교 연산을 위한 특수 메서드
+
+|                         |               |
+| ----------------------- | ------------- |
+| \_\_eq\_\_(self, other) | self == other |
+| \_\_ne\_\_(self, other) | self != other |
+| \_\_lt\_\_(self, other) | self < other  |
+| \_\_gt\_\_(self, other) | self > other  |
+| \_\_le\_\_(self, other) | self <= other |
+| \_\_ge\_\_(self, other) | self >= other |
+
+- 산술 연산을 위한 특수 메서드
+
+|                               |                 |
+| ----------------------------- | --------------- |
+| \_\_add\_\_(self, other)      | self + other    |
+| \_\_sub\_\_(self, other)      | self - other    |
+| \_\_mul\_\_(self, other)      | self \* other   |
+| \_\_floordiv\_\_(self, other) | self // other   |
+| \_\_truediv\_\_(self, other)  | self / other    |
+| \_\_mod\_\_(self, other)      | self % other    |
+| \_\_pow\_\_(self, other)      | self \*\* other |
+
+- 기타 특수 메서드
+
+|                    |            |
+| ------------------ | ---------- |
+| \_\_str\_\_(self)  | str(self)  |
+| \_\_repr\_\_(self) | repr(self) |
+| \_\_len\_\_(self)  | len(self)  |
+
+대화식 인터프리터는 변수의 결과를 출력하기 위해 **repr**() 함수를 사용한다. **str**() 또는 **repr**()을 정의하지 않으면 객체의 기본 문자열을 출력한다.
+
+```python
+class Word():
+    def __init__(self, text):
+        self.text = text
+
+    def __eq__(self, text2):
+        return self.text.lower() == text2.text.lower()
+
+    def __str__(self):
+        return self.text
+
+    def __repr__(self):
+        return "Word('" + self.text + "')"
+
+a = Word('ha')
+a # Word('ha')
+print(a) # ha
+```
+
+## 6.13 컴포지션
+
+서브 클래스가 슈퍼 클래스처럼 행동하고 싶을 때, 상속은 좋은 기술이다. 하지만 컴포지션 또는 어그리게이션의 사용이 더 적절한 경우도 있다.
+
+```python
+class Bill():
+    def __init__(self, description):
+        self.description = description
+
+class Tail():
+    def __init__(self, length):
+        self.length = length
+
+class Duck():
+    def __init__(self, bill, tail):
+        self.bill = bill
+        self.tail = tail
+
+    def about(self):
+        print('This duck has a', self.bill.description, 'bill and a', self.tail.length, 'tail')
+
+tail = Tail('wide orange')
+bill = Bill('long')
+duck = Duck(bill, tail)
+duck.about() # This duck has a long bill and a wide orange tail
+```
+
+**다른 클래스의 일부 기능을 그대로 이용하고 싶으나, 전체 기능 상속은 피하고 싶을 때 사용한다.**
+
+## 6.14 클래스와 객체, 그리고 모듈은 언제 사용할까?
+
+- 비슷한 행동(메서드)을 하지만 내부 상태(속성)가 다른 개별 인스턴스가 필요할때 객체를 사용
+- 클래스는 상속을 지원하지만, 모듈은 상속을 지원하지 않는다
+- 어떤 한 가지 일만 수행한다면 모듈이 가장 좋은 선택(프로그램에서 파이썬 모듈이 참조된 획수에 상관없이 단 하나의 복사본만 불러옴)
+- 여러 함수에 인자로 전달될 수 있는 여러 값을 포함한 여러 변수가 있다면, 클래스를 정의하는 것이 좋다.
+- 딕셔너리, 리스트, 튜플은 모듈보다 더 작고, 간단하며, 빠르다. 그리고 일반적으로 모듈은 클래스보다 더 간단하다.
+
+### 6.14.1 네임드 튜플
+
+네임드 튜플은 튜플의 서브클래스이다. 이름(.name)과 위치([offset])로 값에 접근할 수 있다.
+
+```python
+from collections import namedtuple
+
+Duck = namedtuple('Duck', 'bill tail')
+duck = Duck('wide orange', 'long')
+duck # Duck(bill='wide orange', tail='long')
+duck.bill # 'wide orange'
+duck.tail # 'long'
+duck[1] # 'long'
+```
+
+네임드 튜플의 특징이다.
+
+- 불별하는 객체처럼 행동한다
+- 객체보다 공간 효율성과 시간 효율성이 더 좋다
+- 딕셔너리 형식의 괄호대신 점 표기법으로 속성에 접근할 수 있다
+- 네임드 튜플을 딕셔너리의 키처럼 쓸 수 있다
